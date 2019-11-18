@@ -414,8 +414,6 @@ float calculatePrice(ArrayList <String> selectionNumbers) {
 }
 
 void loadImages(int colorTheme) {
-  //images.clear();
-  println(colorTheme+ " theme");
   String colorMode;
   if (colorTheme == DARK_MODE)colorMode = "DARK";
   else colorMode = "";

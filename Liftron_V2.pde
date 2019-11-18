@@ -1,4 +1,4 @@
-import java.io.File; //<>//
+import java.io.File; //<>// //<>//
 import select.files.*;
 import android.os.Build;
 import android.os.Environment;
@@ -45,11 +45,8 @@ void setup() {
   size(displayWidth, displayHeight, P2D);
   //size(int(displayWidth * 0.83333), displayHeight);//für Endprodukt zurücksetzen
   orientation(LANDSCAPE);
-  long freeMemory = Runtime.getRuntime().freeMemory();
-  println("free: " + freeMemory);
-  theNextFont = createFont("TheNextFont.ttf", width/12);
-  arial = createFont("Arial.ttf", width/12); //createFont("Arial.ttf", width/20);
-  println("free: " + freeMemory);
+  theNextFont = createFont("TheNextFont.ttf", width/6);
+  arial = createFont("Arial.ttf", width/6); //createFont("Arial.ttf", width/20);
 
   if (!txtExist("check.csv") && developerMode == false) {
     println("first run");
@@ -76,8 +73,6 @@ void setup() {
 } 
 
 void makeSetup() {
-  long freeMemory = Runtime.getRuntime().freeMemory();
-  println("free: " + freeMemory);
   products = loadProducts();
   //actualizeStorage(loadStorage());
   //ändern: AKFilmMemberList = sortAKFilmMemberList(loadAKFilmMembers()) //muss nach Hinzufügung oder Entfernung eines Mitglieds aktualisiert werden
@@ -109,7 +104,6 @@ void makeSetup() {
   //drawLogin(LOGIN_STANDARD);
   //drawCashRegister(imagesList, 0);
   //drawStorageOverview(STOCK_OVERVIEW_STANDARD);
-  println("free: " + freeMemory);
   //hhloadPixels();
   updatePixels();
 }
@@ -117,18 +111,21 @@ void makeSetup() {
 
 
 void draw() {
+  if(frameRate < 60) {
+    println(frameRate);
+  }
   if (hasPermission("android.permission.READ_EXTERNAL_STORAGE") && hasPermission("android.permission.WRITE_EXTERNAL_STORAGE")) {
     if (isFirstDraw) {
       println("permission given");
       makeSetup();
       if (isFirstRun) {
-        products = createProducts(); //dev ff.
+        products = createProducts();
         saveProducts(products);
         imagesList = readImages(products.size());
         actualAKFilmMember = new AKFilmMember("Gast", "", 3);
       }
     }
-    
+
     saveTotalTimeTimerTime();
     startTotalTimeTimer();
     savePassedTimeThisRun();
@@ -139,7 +136,7 @@ void draw() {
        3 = > Kasse
        4 = > Bestandsübersicht
        */
-   
+
     case HOME:
       if (homeState == HOME_STANDARD)drawHome();
       else if (homeState == HOME_AMOUNT_INPUT)showAmountInput(manualAmountInputState);
@@ -213,6 +210,11 @@ void touchEnded() {
   stopTouchTime();
 }
 
+
+void backPressed() {
+  myOpenKeyboard();
+}
+
 void specialMouseClicked() {
   if (actualAKFilmMember.accessCategory != 0) {
     if (mouseAndPositionWereInside(0, 0, width/8.2, height/1.28/5 * 1, "CORNERS")) {
@@ -244,7 +246,6 @@ void specialMouseClicked() {
     } else if (mouseAndPositionWereInside(width - width/8.2, height/1.28/5 * 2, width, height/1.28/5 * 3, "CORNERS")) {
       homeState = 3;
     } else if (imageFields.get("activateDarkMode").mouseAndPosWereInside()) {
-      println("changing color mode");
       changeColorMode();
     }
     //} else if (mouseAndPositionWereInside(width - width/8.2, height/1.28/5 * 3, width, height/1.28/5 * 4)) {
