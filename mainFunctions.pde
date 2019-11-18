@@ -218,11 +218,12 @@ void drawStorageOverview(int mode) {
     int numberOfHorizontalLines = int(products.size()/3) + 1;
     if (products.size()%3 == 0)numberOfHorizontalLines-- ;
     int remaining = products.size();
+    int stockOverviewProductsScrolling = loadScroll(STOCK_OVERVIEW_PRODUCTS);
     for (int i = 0; i<numberOfHorizontalLines; i++ ) {
       if (remaining >= 3) {
         remaining -= 3;
-        line(width/8.2, (i + 1.18) * pictureHeight + i * distance + width/35 + loadScroll(STOCK_OVERVIEW_PRODUCTS), width, (i + 1.18) * pictureHeight + i * distance + width/35 + loadScroll(STOCK_OVERVIEW_PRODUCTS));
-      } else line(width/8.2, (i + 1.18) * pictureHeight + i * distance + width/35 + loadScroll(STOCK_OVERVIEW_PRODUCTS), width/8.2 + ((width - width/8.2)/3 * remaining), (i + 1.18) * pictureHeight + i * distance + width/35 + loadScroll(STOCK_OVERVIEW_PRODUCTS));
+        line(width/8.2, (i + 1.18) * pictureHeight + i * distance + width/35 + stockOverviewProductsScrolling, width, (i + 1.18) * pictureHeight + i * distance + width/35 + stockOverviewProductsScrolling);
+      } else line(width/8.2, (i + 1.18) * pictureHeight + i * distance + width/35 + stockOverviewProductsScrolling, width/8.2 + ((width - width/8.2)/3 * remaining), (i + 1.18) * pictureHeight + i * distance + width/35 + stockOverviewProductsScrolling);
     }
     if (products.size()>1) {
       int stacksForLineOne = int(products.size()/3);
@@ -231,10 +232,10 @@ void drawStorageOverview(int mode) {
         stacksForLineOne++ ;
         stacksForLineTwo++ ;
       } else if (products.size()%3 == 1)stacksForLineOne++ ;
-      line(width/8.2 + ((width - width/8.2)/3), loadScroll(STOCK_OVERVIEW_PRODUCTS), width/8.2 + ((width - width/8.2)/3), (stacksForLineOne + 1.18 - 1) * pictureHeight + (stacksForLineOne - 1) * distance + width/35 + loadScroll(STOCK_OVERVIEW_PRODUCTS));
-      line(width/8.2 + ((width - width/8.2)/3 * 2), loadScroll(STOCK_OVERVIEW_PRODUCTS), width/8.2 + ((width - width/8.2)/3 * 2), (stacksForLineTwo + 1.18 - 1) * pictureHeight + (stacksForLineTwo - 1) * distance + width/35 + loadScroll(STOCK_OVERVIEW_PRODUCTS));
+      line(width/8.2 + ((width - width/8.2)/3), stockOverviewProductsScrolling, width/8.2 + ((width - width/8.2)/3), (stacksForLineOne + 1.18 - 1) * pictureHeight + (stacksForLineOne - 1) * distance + width/35 + stockOverviewProductsScrolling);
+      line(width/8.2 + ((width - width/8.2)/3 * 2), stockOverviewProductsScrolling, width/8.2 + ((width - width/8.2)/3 * 2), (stacksForLineTwo + 1.18 - 1) * pictureHeight + (stacksForLineTwo - 1) * distance + width/35 + stockOverviewProductsScrolling);
     } else {
-      line(width/8.2 + ((width - width/8.2)/3), loadScroll(STOCK_OVERVIEW_PRODUCTS), width/8.2 + ((width - width/8.2)/3), 1.18 * pictureHeight + width/35 + loadScroll(STOCK_OVERVIEW_PRODUCTS));
+      line(width/8.2 + ((width - width/8.2)/3), stockOverviewProductsScrolling, width/8.2 + ((width - width/8.2)/3), 1.18 * pictureHeight + width/35 + stockOverviewProductsScrolling);
     }   
     for (int line = 0; line<numberOfLines; line++ ) {
       for (int t = 0; t<productsPerLine && boxCounter<products.size(); t++ ) {
@@ -257,13 +258,13 @@ void drawStorageOverview(int mode) {
           additionalShift += "  ";
           additionalShift2 -= height/82;
         }
-        if (mode != STOCK_OVERVIEW_NEW_PURCHASE && mode != STOCK_OVERVIEW_NEW_PURCHASE_ADDING_RUNNING)text(additionalShift + products.get(boxCounter).inStorage, width/8.2 + t * productWidth + width/60 + height/60, line * pictureHeight + line * distance + width/35 + loadScroll(STOCK_OVERVIEW_PRODUCTS));
-        else text(additionalShift + int(universalLoadArray("purchaseNumberOfProduct")[boxCounter]), width/8.2 + t * productWidth + width/60 + height/60, line * pictureHeight + line * distance + width/35 + loadScroll(STOCK_OVERVIEW_PRODUCTS));
+        if (mode != STOCK_OVERVIEW_NEW_PURCHASE && mode != STOCK_OVERVIEW_NEW_PURCHASE_ADDING_RUNNING)text(additionalShift + products.get(boxCounter).inStorage, width/8.2 + t * productWidth + width/60 + height/60, line * pictureHeight + line * distance + width/35 + stockOverviewProductsScrolling);
+        else text(additionalShift + int(universalLoadArray("purchaseNumberOfProduct")[boxCounter]), width/8.2 + t * productWidth + width/60 + height/60, line * pictureHeight + line * distance + width/35 + stockOverviewProductsScrolling);
         //ändern
         imageMode(CORNER);
-        image(products.get(boxCounter).productImage, width/8.2 + t * productWidth + width/60 + textWidth(25 + "") + height/150 + textWidth("X") + height/100, line * pictureHeight + line * distance - height/65 + width/35 + loadScroll(STOCK_OVERVIEW_PRODUCTS), pictureWidth, pictureHeight);
+        image(products.get(boxCounter).productImage, width/8.2 + t * productWidth + width/60 + textWidth(25 + "") + height/150 + textWidth("X") + height/100, line * pictureHeight + line * distance - height/65 + width/35 + stockOverviewProductsScrolling, pictureWidth, pictureHeight);
         textSize(height/11);
-        text("x", width/8.2 + t * productWidth + width/60 + height/120 + textWidth(25 + "") + height/33 + height/72 + additionalShift2, line * pictureHeight + line * distance + width/35 + loadScroll(STOCK_OVERVIEW_PRODUCTS));
+        text("x", width/8.2 + t * productWidth + width/60 + height/120 + textWidth(25 + "") + height/33 + height/72 + additionalShift2, line * pictureHeight + line * distance + width/35 + stockOverviewProductsScrolling);
         boxCounter++ ;
       }
     }
