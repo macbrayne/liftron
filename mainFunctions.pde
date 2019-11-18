@@ -193,7 +193,6 @@ void drawCashRegister(ArrayList <PImage> images, int state) {
 
 void drawStorageOverview(int mode) {
   if (!(products.size() == 0)) {
-    //closeKeyboard();
     myCloseKeyboard();
     background(colors.get("white"));
     imageMode(CENTER);

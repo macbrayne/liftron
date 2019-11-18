@@ -1,4 +1,4 @@
-import java.io.File; //<>// //<>//
+import java.io.File; //<>//
 import select.files.*;
 import android.os.Build;
 import android.os.Environment;
@@ -111,9 +111,6 @@ void makeSetup() {
 
 
 void draw() {
-  if(frameRate < 60) {
-    println(frameRate);
-  }
   if (hasPermission("android.permission.READ_EXTERNAL_STORAGE") && hasPermission("android.permission.WRITE_EXTERNAL_STORAGE")) {
     if (isFirstDraw) {
       println("permission given");
