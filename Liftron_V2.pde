@@ -111,6 +111,7 @@ void makeSetup() {
 
 
 void draw() {
+  println(frameRate);
   if (hasPermission("android.permission.READ_EXTERNAL_STORAGE") && hasPermission("android.permission.WRITE_EXTERNAL_STORAGE")) {
     if (isFirstDraw) {
       println("permission given");
@@ -209,7 +210,7 @@ void touchEnded() {
 
 
 void backPressed() {
-  myOpenKeyboard();
+  openKeyboard();
 }
 
 void specialMouseClicked() {
