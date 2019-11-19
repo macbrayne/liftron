@@ -420,29 +420,29 @@ void showPrice(ArrayList <String> selectionNumbers) {
 //}
 
 
-void drawTransition(float startX, float startY, float transitionLength, float transitionLong, float steps, int strongness, String direction) {
+void drawTransition(float startX, float startY, float transitionLength, float transitionLong, float steps, int strength, String direction) {
   noStroke();
   rectMode(CORNERS);
   if (steps>transitionLength)steps = transitionLength;  
   if (direction == "right") {
     for (int i = 0; i < steps; i++ ) {
       fill(colors.get("white"), int(i * (255/steps))); 
-      rect(startX + i * (transitionLength/steps), startY, startX + (i + 1) * (transitionLength/steps) + strongness, startY + transitionLong);
+      rect(startX + i * (transitionLength/steps), startY, startX + (i + 1) * (transitionLength/steps) + strength, startY + transitionLong);
     }
   } else if (direction == "left") {
     for (int i = 0; i < steps; i++ ) {
       fill(colors.get("white"), int(i * (255/steps))); 
-      rect(startX - i * (transitionLength/steps), startY, startX - (i + 1) * (transitionLength/steps) - strongness, startY + transitionLong);
+      rect(startX - i * (transitionLength/steps), startY, startX - (i + 1) * (transitionLength/steps) - strength, startY + transitionLong);
     }
   } else if (direction == "up") {
     for (int i = 0; i < steps; i++ ) {
       fill(colors.get("white"), int(i * (255/steps))); 
-      rect(startX, startY - i * (transitionLength/steps), startX + transitionLong, startY - (i + 1) * (transitionLength/steps) - strongness);
+      rect(startX, startY - i * (transitionLength/steps), startX + transitionLong, startY - (i + 1) * (transitionLength/steps) - strength);
     }
   } else if (direction == "down") {
     for (int i = 0; i < steps; i++ ) {
       fill(colors.get("white"), int(i * (255/steps))); 
-      rect(startX, startY + i * (transitionLength/steps), startX + transitionLong, startY + (i + 1) * (transitionLength/steps) + strongness);
+      rect(startX, startY + i * (transitionLength/steps), startX + transitionLong, startY + (i + 1) * (transitionLength/steps) + strength);
     }
   }
 }
