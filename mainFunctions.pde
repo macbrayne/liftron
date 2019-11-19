@@ -269,7 +269,7 @@ void drawStorageOverview(int mode) {
       }
     }
     drawSidebar();
-    drawTransition(width/8.2, height - 90, 90, width - width/8.2, 90, 4, "down");
+    drawTransition(width/8.2, height - height / 20, height / 20, width - width/8.2, 90, 3, "down");
     switch(mode) {
     case STOCK_OVERVIEW_STOCK_CORRECTION_RUNNING:
       drawStockCorrectionWindow(int(universalLoad("clickedProduct")));
