@@ -12,13 +12,34 @@ For reusing the old api
 */
 // Can be inlined
 void shiftScroll(String scrollField, int shift) {
+  int scroll = getScroll(scrollField);
+  int numberOfLines;
   switch(scrollField) {
     case CASH_REGISTER_PRODUCTS:
-      
+      if (products.size()%5 != 0) {
+        numberOfLines = int(products.size()/5) + 1;
+      } else {
+        numberOfLines = int(products.size()/5);
+      }
+      if (scroll + shift <= 0 && scroll + shift >= - (numberOfLines - 3) * height/4) {
+        scroll = scroll + shift;
+      }
       break;
     case CASH_REGISTER_SELECTION:
+      if (scroll + shift >= 0 && scroll + shift<(width/7 * (loadSelection().length - 3))) {
+        scroll = scroll + shift;
+      }
       break;
     case STOCK_OVERVIEW_PRODUCTS:
+      if (products.size()%3 != 0) {
+        numberOfLines = products.size()/3 + 1;
+      }
+      else {
+        numberOfLines = int(products.size()/3);
+      }
+      if (scroll + shift <= 0 && scroll + shift >= - (numberOfLines - 5.2382) * height/5.2382) {
+        scroll = scroll + shift;
+      }
       break;
     default:
       throw new RuntimeException(String.format("Invalid argument: %s", scrollField));
